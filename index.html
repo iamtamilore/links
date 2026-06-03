@@ -93,6 +93,27 @@
   .privacy{margin-top:14px;font-size:11.5px;color:var(--muted);line-height:1.5;
     background:var(--card);border:1px solid var(--line);border-radius:12px;padding:11px 13px}
   .privacy b{color:#7dd3fc}
+
+  /* confirmation toast */
+  .toast{position:fixed;inset:0;display:none;align-items:center;justify-content:center;
+    background:rgba(5,10,20,.72);backdrop-filter:blur(4px);z-index:50;padding:24px}
+  .toast.show{display:flex}
+  .toast .box{max-width:360px;width:100%;background:#10192e;border:1px solid var(--line);
+    border-radius:20px;padding:26px 22px;text-align:center;box-shadow:0 20px 60px rgba(0,0,0,.5)}
+  .toast .tick{width:56px;height:56px;border-radius:50%;background:#25d366;margin:0 auto 14px;
+    display:flex;align-items:center;justify-content:center;font-size:30px}
+  .toast h3{font-size:19px;font-weight:800}
+  .toast p{color:var(--muted);font-size:14px;line-height:1.55;margin-top:10px}
+  .toast .who{display:flex;align-items:center;gap:10px;justify-content:center;margin-top:16px;
+    background:var(--card);border:1px solid var(--line);border-radius:14px;padding:10px 12px}
+  .toast .who img{width:40px;height:40px;border-radius:50%;object-fit:cover}
+  .toast .who .nm{font-size:13.5px;font-weight:700;text-align:left}
+  .toast .who .nm small{display:block;color:var(--muted);font-weight:500;font-size:11.5px}
+  .toast .close{margin-top:18px;width:100%;border:none;cursor:pointer;border-radius:13px;
+    padding:13px;font-size:15px;font-weight:700;color:#fff;
+    background:linear-gradient(135deg,#2563eb,#1d4ed8)}
+  .toast .alt{margin-top:12px;font-size:12px;color:var(--muted)}
+  .toast .alt a{color:#7dd3fc;text-decoration:none}
 </style>
 </head>
 <body>
@@ -140,6 +161,22 @@
     <div class="foot">
       MSc Artificial Intelligence &middot; National College of Ireland<br/>
       <a href="mailto:alabitaiwo625@gmail.com">alabitaiwo625@gmail.com</a>
+    </div>
+  </div>
+
+  <!-- confirmation -->
+  <div class="toast" id="toast">
+    <div class="box">
+      <div class="tick">✓</div>
+      <h3>Almost there!</h3>
+      <p>Make sure you hit <b>send</b> in the app that just opened. Then keep an eye
+         out &mdash; I'll personally message you back, usually within a day.</p>
+      <div class="who">
+        <img src="avatar.jpg" alt="Taiwo" />
+        <div class="nm">Taiwo Alabi<small>This is me &mdash; same photo on WhatsApp</small></div>
+      </div>
+      <p class="alt">Prefer email? <a href="mailto:alabitaiwo625@gmail.com">alabitaiwo625@gmail.com</a></p>
+      <button class="close" onclick="hideToast()">Got it</button>
     </div>
   </div>
 
@@ -235,14 +272,19 @@ function buildMessage(){
   return m;
 }
 
+function showToast(){ document.getElementById("toast").classList.add("show"); }
+function hideToast(){ document.getElementById("toast").classList.remove("show"); }
+
 function sendWA(){
   window.open("https://wa.me/" + WA_NUMBER + "?text=" + encodeURIComponent(buildMessage()), "_blank");
+  showToast();
 }
 function sendEmail(){
   const subj = "Digital card request" + (chosen ? " — " + chosen.name : "");
   window.location.href = "mailto:" + EMAIL +
     "?subject=" + encodeURIComponent(subj) +
     "&body=" + encodeURIComponent(buildMessage());
+  showToast();
 }
 </script>
 </body>
