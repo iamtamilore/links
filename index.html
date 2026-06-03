@@ -4,7 +4,7 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Taiwo Alabi</title>
-<meta name="description" content="Taiwo Alabi — AI builder. LinkedIn and live AI projects." />
+<meta name="description" content="Taiwo Alabi - AI builder. LinkedIn and live AI projects." />
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Lato&family=Inter:wght@400;700;800&family=Montserrat:wght@700;800&family=Open+Sans&family=Roboto+Slab:wght@700&family=Roboto&family=Space+Grotesk:wght@700&display=swap" rel="stylesheet">
@@ -186,7 +186,7 @@
     <div class="sec">
       <h2>Want a card like this?</h2>
       <p class="lead">One link + QR card for your business. Works for <b>any</b>
-        trade or person &mdash; just pick the look you like.</p>
+        trade or person - just pick the look you like.</p>
 
       <ul class="incl">
         <li>📸 A <b>showcase gallery</b> of your work or products, with names &amp; prices</li>
@@ -200,7 +200,7 @@
       <span class="price">from <b>&euro;30</b> &middot; live in a day</span>
 
       <div class="themes" id="themes"></div>
-      <p class="selnote" id="selnote">Don't see your exact trade? Doesn't matter &mdash;
+      <p class="selnote" id="selnote">Don't see your exact trade? Doesn't matter -
         pick the style you like, or just send below and I'll suggest one.</p>
 
       <div class="intake">
@@ -244,10 +244,10 @@
       <div class="tick">✓</div>
       <h3>Almost there!</h3>
       <p>Make sure you hit <b>send</b> in the app that just opened. Then keep an eye
-         out &mdash; I'll personally message you back, usually within a day.</p>
+         out - I'll personally message you back, usually within a day.</p>
       <div class="who">
         <img src="avatar.jpg" alt="Taiwo" />
-        <div class="nm">Taiwo Alabi<small>This is me &mdash; same photo on WhatsApp</small></div>
+        <div class="nm">Taiwo Alabi<small>This is me - same photo on WhatsApp</small></div>
       </div>
       <p class="alt">Prefer email? <a href="mailto:alabitaiwo625@gmail.com">alabitaiwo625@gmail.com</a></p>
       <button class="close" onclick="hideToast()">Got it</button>
@@ -256,7 +256,7 @@
 
 <script>
 /* ============================================================
-   EDIT HERE — add / remove / reorder links anytime.
+   EDIT HERE - add / remove / reorder links anytime.
    Each item: { icon, title, sub, url, primary(optional) }
    Save the file, push to GitHub, done. The QR never changes.
    ============================================================ */
@@ -298,7 +298,7 @@ wrap.innerHTML = LINKS.map(l => `
   </a>`).join("");
 
 /* ============================================================
-   DIGITAL CARD — themes + intake.
+   DIGITAL CARD - themes + intake.
    To add a theme: copy a block, set name/for/bg/fg/accent.
    Your contact: change WA_NUMBER (intl, no +) and EMAIL below.
    ============================================================ */
@@ -306,11 +306,11 @@ const WA_NUMBER = "353870042838";        // WhatsApp, international, no '+'
 const EMAIL     = "alabitaiwo625@gmail.com";
 
 const THEMES = [
-  { id:"salon",  name:"Salon",  for:"Soft & elegant — beauty, wellness & more", bg:"#F9F5F0", fg:"#4A4A4A", accent:"#C98B8B" },
-  { id:"shop",   name:"Shop",   for:"Clean & professional — any business",      bg:"#FFFFFF", fg:"#1F2022", accent:"#2B2D42" },
-  { id:"market", name:"Market", for:"Bold & warm — food, events & more",        bg:"#FFF9E6", fg:"#1D3557", accent:"#E63946" },
-  { id:"yard",   name:"Yard",   for:"Strong & rugged — trades & more",          bg:"#1A1A1A", fg:"#F5F5F5", accent:"#D4A373" },
-  { id:"studio", name:"Studio", for:"Sleek & modern — creative & tech",         bg:"#0D1117", fg:"#C9D1D9", accent:"#58A6FF" },
+  { id:"salon",  name:"Salon",  for:"Soft & elegant - beauty, wellness & more", bg:"#F9F5F0", fg:"#4A4A4A", accent:"#C98B8B" },
+  { id:"shop",   name:"Shop",   for:"Clean & professional - any business",      bg:"#FFFFFF", fg:"#1F2022", accent:"#2B2D42" },
+  { id:"market", name:"Market", for:"Bold & warm - food, events & more",        bg:"#FFF9E6", fg:"#1D3557", accent:"#E63946" },
+  { id:"yard",   name:"Yard",   for:"Strong & rugged - trades & more",          bg:"#1A1A1A", fg:"#F5F5F5", accent:"#D4A373" },
+  { id:"studio", name:"Studio", for:"Sleek & modern - creative & tech",         bg:"#0D1117", fg:"#C9D1D9", accent:"#58A6FF" },
 ];
 
 let chosen = null;
@@ -329,7 +329,7 @@ function pickTheme(id){
   chosen = THEMES.find(t => t.id === id);
   document.querySelectorAll(".theme").forEach(el =>
     el.classList.toggle("sel", el.dataset.id === id));
-  note.innerHTML = `Style: <b>${chosen.name}</b> &mdash; this is how your page would look. Fill in below and send.`;
+  note.innerHTML = `Style: <b>${chosen.name}</b> - this is how your page would look. Fill in below and send.`;
   // LIVE PREVIEW: re-skin the whole page
   document.body.setAttribute("data-theme", id);
   document.body.classList.add("previewing");
@@ -378,7 +378,7 @@ function sendEmail(provider){
   const TO = encodeURIComponent(EMAIL);
   let url;
   if(provider === "gmail"){
-    // Gmail web compose — to + subject + body pre-filled
+    // Gmail web compose - to + subject + body pre-filled
     url = "https://mail.google.com/mail/?view=cm&fs=1&to=" + TO + "&su=" + S + "&body=" + B;
     window.open(url, "_blank");
   } else if(provider === "outlook"){
