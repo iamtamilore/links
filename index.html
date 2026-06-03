@@ -88,6 +88,12 @@
     border:1px solid var(--line);border-radius:20px;padding:6px 15px;
     font-size:13px;color:var(--text)}
   .price b{color:#7dd3fc}
+  .incl{list-style:none;margin:16px 0 0;padding:0;text-align:left;display:flex;
+    flex-direction:column;gap:9px}
+  .incl li{font-size:13.5px;color:var(--muted);line-height:1.4}
+  .incl li b{color:var(--text)}
+  .example{margin-top:12px;font-size:13px;color:var(--muted);text-align:left}
+  .example a{color:#7dd3fc;text-decoration:none;font-weight:700}
 
   .themes{margin-top:22px;display:grid;grid-template-columns:1fr 1fr;gap:12px}
   .theme{cursor:pointer;border:2px solid transparent;border-radius:16px;overflow:hidden;
@@ -179,9 +185,18 @@
     <!-- ===== Digital card business ===== -->
     <div class="sec">
       <h2>Want a card like this?</h2>
-      <p class="lead">One link + QR for your photo, contact, socials, work and
-        products. Works for <b>any</b> business or person &mdash; just pick the
-        look you like.</p>
+      <p class="lead">One link + QR card for your business. Works for <b>any</b>
+        trade or person &mdash; just pick the look you like.</p>
+
+      <ul class="incl">
+        <li>📸 A <b>showcase gallery</b> of your work or products, with names &amp; prices</li>
+        <li>💬 One-tap <b>order / book on WhatsApp</b></li>
+        <li>➕ <b>Save-my-number</b> button + your socials &amp; links</li>
+        <li>🔳 Your own <b>QR code + phone wallpaper</b></li>
+      </ul>
+      <p class="example">See a real one:
+        <a href="cards/katie-bakes/" target="_blank">Katie's Bakes ↗</a></p>
+
       <span class="price">from <b>&euro;30</b> &middot; live in a day</span>
 
       <div class="themes" id="themes"></div>
@@ -193,6 +208,8 @@
         <input id="f_name" type="text" placeholder="e.g. Katie Cullene" />
         <label>What you do</label>
         <input id="f_trade" type="text" placeholder="e.g. Nail tech, barber, food stall" />
+        <label>What would you showcase? (your products / work)</label>
+        <input id="f_show" type="text" placeholder="e.g. cakes, nail sets, haircuts, photos" />
         <label>Best way to reach you</label>
         <input id="f_contact" type="text" placeholder="WhatsApp / IG / email" />
         <label>Anything else? (optional)</label>
@@ -328,12 +345,14 @@ function resetTheme(){
 function buildMessage(){
   const name    = (document.getElementById("f_name").value || "").trim();
   const trade   = (document.getElementById("f_trade").value || "").trim();
+  const show    = (document.getElementById("f_show").value || "").trim();
   const contact = (document.getElementById("f_contact").value || "").trim();
   const noteTxt = (document.getElementById("f_note").value || "").trim();
   let m = "Hi Taiwo, I'd like a digital card.\n";
   m += "Style: " + (chosen ? chosen.name : "(not picked yet)") + "\n";
   if(name)    m += "Name: " + name + "\n";
   if(trade)   m += "What I do: " + trade + "\n";
+  if(show)    m += "Showcase: " + show + "\n";
   if(contact) m += "Reach me: " + contact + "\n";
   if(noteTxt) m += "Note: " + noteTxt + "\n";
   return m;
