@@ -99,8 +99,21 @@
 
   .qrshow{margin-top:18px;display:flex;gap:14px;align-items:center;justify-content:center;
     background:var(--card);border:1px solid var(--line);border-radius:16px;padding:14px}
-  .qrshow img.wp{height:150px;border-radius:12px;box-shadow:0 6px 18px rgba(0,0,0,.35)}
-  .qrshow img.qr{height:96px;width:96px;border-radius:10px;background:#fff;padding:6px}
+  .qrshow img.wp{height:150px;border-radius:12px;box-shadow:0 6px 18px rgba(0,0,0,.35);cursor:zoom-in;transition:transform .12s ease}
+  .qrshow img.qr{height:96px;width:96px;border-radius:10px;background:#fff;padding:6px;cursor:zoom-in;transition:transform .12s ease}
+  .qrshow img.wp:hover,.qrshow img.qr:hover{transform:scale(1.04)}
+
+  /* full-screen lightbox for QR / wallpaper */
+  .lb{position:fixed;inset:0;background:rgba(0,0,0,.88);display:none;align-items:center;
+    justify-content:center;z-index:9999;padding:24px;cursor:zoom-out;backdrop-filter:blur(4px)}
+  .lb.open{display:flex}
+  .lb img{max-width:92vw;max-height:82vh;border-radius:14px;background:#fff;padding:10px;
+    box-shadow:0 20px 60px rgba(0,0,0,.6)}
+  .lb .x{position:absolute;top:18px;right:20px;width:44px;height:44px;border-radius:50%;
+    background:rgba(255,255,255,.14);color:#fff;border:none;font-size:22px;cursor:pointer;
+    display:flex;align-items:center;justify-content:center}
+  .lb .hint{position:absolute;bottom:26px;left:0;right:0;text-align:center;color:#cfd8e3;
+    font-size:13px}
   .qrshow .cap{font-size:12.5px;color:var(--muted);text-align:left;line-height:1.45}
   .qrshow .cap b{color:var(--text)}
 
@@ -205,11 +218,13 @@
       </ul>
 
       <div class="qrshow">
-        <img class="wp" src="lockscreen_wallpaper.png" alt="Example phone wallpaper with QR" />
-        <img class="qr" src="qr_only.png" alt="Example QR code" />
+        <img class="wp" src="lockscreen_wallpaper.png" alt="Example phone wallpaper with QR"
+             onclick="openLB('lockscreen_wallpaper.png')" />
+        <img class="qr" src="qr_only.png" alt="Example QR code"
+             onclick="openLB('qr_only.png')" />
         <span class="cap">You get a <b>QR code</b> + a matching <b>phone wallpaper</b>.
           Set it as your lock screen &mdash; people scan it and land on your card.
-          <b>This page is mine.</b></span>
+          <b>Tap to enlarge.</b></span>
       </div>
 
       <span class="price">from <b>&euro;30</b> &middot; live in a day</span>
@@ -269,6 +284,26 @@
     </div>
   </div>
 
+  <!-- full-screen image lightbox (QR / wallpaper) -->
+  <div class="lb" id="lb" onclick="closeLB()">
+    <button class="x" onclick="closeLB();event.stopPropagation()">&times;</button>
+    <img id="lbimg" src="" alt="enlarged" onclick="event.stopPropagation()" />
+    <div class="hint">Tap anywhere to close</div>
+  </div>
+
+<script>
+function openLB(src){
+  const lb=document.getElementById("lb");
+  document.getElementById("lbimg").src=src;
+  lb.classList.add("open");
+  document.body.style.overflow="hidden";
+}
+function closeLB(){
+  document.getElementById("lb").classList.remove("open");
+  document.body.style.overflow="";
+}
+document.addEventListener("keydown",e=>{ if(e.key==="Escape") closeLB(); });
+</script>
 <script>
 /* ============================================================
    EDIT HERE - add / remove / reorder links anytime.
