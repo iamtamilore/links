@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Fade &amp; Co</title>
+<meta name="description" content="Fade &amp; Co - Fresh fades, beard trims &amp; hot-towel shaves — Dublin" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Lato&family=Inter:wght@400;700;800&family=Montserrat:wght@700;800&family=Open+Sans&family=Roboto+Slab:wght@700&family=Roboto&family=Space+Grotesk:wght@700&display=swap" rel="stylesheet">
+<style>
+  /* ---- THEME (one of: salon shop market yard studio) ---- */
+  :root{
+    /* default = studio; the generator sets body[data-theme] */
+    --bg:#0D1117; --grad:#16243f; --text:#C9D1D9; --muted:#8b97a5;
+    --card:rgba(255,255,255,.06); --line:rgba(255,255,255,.14); --accent:#58A6FF;
+    --hfont:"Space Grotesk",sans-serif; --bfont:"Inter",sans-serif; --oncard:#fff;
+  }
+  body[data-theme="salon"]{ --bg:#F9F5F0;--grad:#F3E7E0;--text:#4A4A4A;--muted:#8a7d77;
+    --card:rgba(0,0,0,.04);--line:rgba(0,0,0,.10);--accent:#C98B8B;
+    --hfont:"Playfair Display",serif;--bfont:"Lato",sans-serif;--oncard:#fff; }
+  body[data-theme="shop"]{ --bg:#FFFFFF;--grad:#EEF1F6;--text:#1F2022;--muted:#5b6168;
+    --card:rgba(0,0,0,.04);--line:rgba(0,0,0,.10);--accent:#2B2D42;
+    --hfont:"Inter",sans-serif;--bfont:"Inter",sans-serif;--oncard:#fff; }
+  body[data-theme="market"]{ --bg:#FFF9E6;--grad:#FBEFC9;--text:#1D3557;--muted:#5d6b80;
+    --card:rgba(0,0,0,.04);--line:rgba(0,0,0,.10);--accent:#E63946;
+    --hfont:"Montserrat",sans-serif;--bfont:"Open Sans",sans-serif;--oncard:#fff; }
+  body[data-theme="yard"]{ --bg:#1A1A1A;--grad:#2a2a2a;--text:#F5F5F5;--muted:#a9a39c;
+    --card:rgba(255,255,255,.06);--line:rgba(255,255,255,.14);--accent:#D4A373;
+    --hfont:"Roboto Slab",serif;--bfont:"Roboto",sans-serif;--oncard:#1a1a1a; }
+  body[data-theme="studio"]{ --bg:#0D1117;--grad:#16243f;--text:#C9D1D9;--muted:#8b97a5;
+    --card:rgba(255,255,255,.06);--line:rgba(255,255,255,.14);--accent:#58A6FF;
+    --hfont:"Space Grotesk",sans-serif;--bfont:"Inter",sans-serif;--oncard:#fff; }
+
+  *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+  body{font-family:var(--bfont);color:var(--text);min-height:100vh;
+    background:radial-gradient(1200px 600px at 50% -10%, var(--grad) 0%, var(--bg) 55%) fixed;
+    display:flex;justify-content:center;padding:40px 18px 60px;}
+  .wrap{width:100%;max-width:460px;text-align:center}
+  h1,h2{font-family:var(--hfont)}
+
+  .avatar{width:118px;height:118px;border-radius:50%;object-fit:cover;
+    border:3px solid var(--accent);box-shadow:0 10px 30px rgba(0,0,0,.30);
+    margin:0 auto 14px;display:block;background:var(--card)}
+  h1{font-size:25px;font-weight:800;letter-spacing:-.3px}
+  .tag{color:var(--muted);font-size:14.5px;margin-top:6px;line-height:1.5}
+  .loc{display:inline-flex;gap:6px;color:var(--muted);font-size:13px;margin-top:11px;
+    background:var(--card);border:1px solid var(--line);border-radius:20px;padding:5px 13px}
+
+  /* action buttons */
+  .acts{margin-top:20px;display:flex;flex-direction:column;gap:11px}
+  .acts a{display:flex;align-items:center;gap:13px;text-decoration:none;color:var(--text);
+    background:var(--card);border:1px solid var(--line);border-radius:15px;
+    padding:14px 17px;font-size:15.5px;font-weight:600;transition:transform .12s,filter .2s}
+  .acts a:active{transform:scale(.98)}
+  .acts a.primary{background:var(--accent);color:var(--oncard);border-color:transparent}
+  .acts a.primary:hover{filter:brightness(1.08)}
+  .acts a .ico{flex:none;width:34px;height:34px;border-radius:10px;display:flex;
+    align-items:center;justify-content:center;font-size:17px;background:rgba(127,127,127,.12)}
+  .acts a.primary .ico{background:rgba(255,255,255,.20)}
+  .acts a .arrow{margin-left:auto;opacity:.6;font-size:17px}
+
+  /* section heading */
+  .sechead{margin:34px 0 4px;font-size:18px;font-weight:800;text-align:left}
+
+  /* PRODUCT GALLERY - full image, NOT cropped */
+  .gallery{margin-top:14px;display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  .item{background:var(--card);border:1px solid var(--line);border-radius:15px;
+    overflow:hidden;text-align:left;cursor:pointer;transition:transform .12s}
+  .item:active{transform:scale(.98)}
+  .item .imgbox{width:100%;aspect-ratio:1/1;background:rgba(127,127,127,.08);
+    display:flex;align-items:center;justify-content:center;overflow:hidden}
+  /* contain = whole product visible (no edges chopped). cover would crop. */
+  .item img{width:100%;height:100%;object-fit:cover;display:block}
+  .item .cap{padding:9px 11px}
+  .item .cap .nm{font-size:13.5px;font-weight:700;line-height:1.2}
+  .item .cap .pr{font-size:12.5px;color:var(--accent);font-weight:700;margin-top:2px}
+
+  /* lightbox (tap to enlarge, full uncropped) */
+  .lb{position:fixed;inset:0;display:none;align-items:center;justify-content:center;
+    background:rgba(0,0,0,.88);z-index:60;padding:20px;flex-direction:column}
+  .lb.show{display:flex}
+  .lb img{max-width:100%;max-height:78vh;object-fit:contain;border-radius:12px}
+  .lb .cap{color:#fff;margin-top:14px;text-align:center}
+  .lb .cap .nm{font-size:17px;font-weight:700}
+  .lb .cap .pr{color:var(--accent);font-weight:700;margin-top:3px}
+  .lb .x{position:absolute;top:18px;right:20px;color:#fff;font-size:30px;cursor:pointer;
+    background:rgba(255,255,255,.15);width:42px;height:42px;border-radius:50%;
+    display:flex;align-items:center;justify-content:center}
+
+  .foot{margin-top:34px;color:var(--muted);font-size:12px;line-height:1.6;text-align:center}
+  .foot a{color:var(--accent);text-decoration:none}
+  .madeby{margin-top:8px;font-size:11px;opacity:.65}
+</style>
+</head>
+<body data-theme="yard">
+  <div class="wrap">
+    <img class="avatar" src="photos/avatar.jpg" alt="Fade &amp; Co" />
+    <h1>Fade &amp; Co</h1>
+    <p class="tag">Fresh fades, beard trims &amp; hot-towel shaves — Dublin</p>
+    <div class="loc">📍 Dublin, Ireland</div>
+
+    <div class="acts" id="acts"></div>
+
+    <h2 class="sechead" id="galleryhead" style="display:none">The Work</h2>
+    <div class="gallery" id="gallery"></div>
+
+    <div class="foot">
+      <span id="footcontact"></span>
+      <div class="madeby">Card by Taiwo &middot; <a href="https://iamtamilore.github.io/links/" target="_blank">get yours</a></div>
+    </div>
+  </div>
+
+  <div class="lb" id="lb" onclick="closeLb(event)">
+    <span class="x" onclick="closeLb(event,true)">×</span>
+    <img id="lbimg" src="" alt="" />
+    <div class="cap"><div class="nm" id="lbnm"></div><div class="pr" id="lbpr"></div></div>
+  </div>
+
+<script>
+/* The generator injects DATA below this line. */
+const DATA = {"actions": [{"type": "whatsapp", "label": "Book on WhatsApp", "url": "https://wa.me/353800000000"}, {"type": "instagram", "label": "Instagram", "url": "https://instagram.com/"}, {"type": "contact", "label": "Save my number", "url": "contact.vcf"}], "products": [{"img": "photos/01.jpg", "name": "Skin Fade", "price": "\u20ac20"}, {"img": "photos/02.jpg", "name": "Beard Trim &amp; Line Up", "price": "\u20ac15"}, {"img": "photos/03.jpg", "name": "Hot Towel Shave", "price": "\u20ac25"}, {"img": "photos/04.jpg", "name": "Kids Cut", "price": "\u20ac14"}], "footer": "Sample card \u00b7 made by Taiwo"};
+
+/* action buttons */
+const ICON = { phone:"📞", whatsapp:"💬", instagram:"📷", email:"✉️",
+  website:"🌐", book:"📅", tiktok:"🎵", facebook:"👍", map:"📍", contact:"➕" };
+const acts = document.getElementById("acts");
+acts.innerHTML = (DATA.actions||[]).map((a,i)=>`
+  <a class="${i===0?'primary':''}" href="${a.url}" target="_blank" rel="noopener">
+    <span class="ico">${ICON[a.type]||"🔗"}</span>
+    <span>${a.label}</span><span class="arrow">›</span>
+  </a>`).join("");
+
+/* gallery */
+const g = document.getElementById("gallery");
+const prods = DATA.products||[];
+if(prods.length){
+  document.getElementById("galleryhead").style.display="block";
+  g.innerHTML = prods.map((p,i)=>`
+    <div class="item" onclick="openLb(${i})">
+      <div class="imgbox"><img src="${p.img}" alt="${p.name||''}" loading="lazy"></div>
+      <div class="cap">
+        <div class="nm">${p.name||''}</div>
+        ${p.price?`<div class="pr">${p.price}</div>`:''}
+      </div>
+    </div>`).join("");
+}
+
+/* lightbox */
+function openLb(i){
+  const p = prods[i];
+  document.getElementById("lbimg").src = p.img;
+  document.getElementById("lbnm").textContent = p.name||"";
+  document.getElementById("lbpr").textContent = p.price||"";
+  document.getElementById("lb").classList.add("show");
+}
+function closeLb(e,force){
+  if(force || e.target.id==="lb"){ document.getElementById("lb").classList.remove("show"); }
+}
+
+/* footer contact */
+if(DATA.footer) document.getElementById("footcontact").innerHTML = DATA.footer;
+</script>
+</body>
+</html>
