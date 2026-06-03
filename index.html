@@ -52,6 +52,47 @@
 
   .foot{margin-top:30px;color:var(--muted);font-size:12.5px;line-height:1.6}
   .foot a{color:var(--accent);text-decoration:none}
+
+  /* ---- Digital card business section ---- */
+  .sec{margin-top:46px;padding-top:30px;border-top:1px solid var(--line)}
+  .sec h2{font-size:21px;font-weight:800;letter-spacing:-.2px}
+  .sec .lead{color:var(--muted);font-size:14px;margin-top:8px;line-height:1.55}
+  .price{display:inline-block;margin-top:14px;background:var(--card);
+    border:1px solid var(--line);border-radius:20px;padding:6px 15px;
+    font-size:13px;color:var(--text)}
+  .price b{color:#7dd3fc}
+
+  .themes{margin-top:22px;display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  .theme{cursor:pointer;border:2px solid transparent;border-radius:16px;overflow:hidden;
+    text-align:left;transition:transform .12s ease, border-color .2s ease}
+  .theme:active{transform:scale(.98)}
+  .theme.sel{border-color:#58a6ff;box-shadow:0 0 0 3px rgba(88,166,255,.25)}
+  .theme .swatch{height:74px;display:flex;align-items:center;justify-content:center;
+    font-size:15px;font-weight:700}
+  .theme .label{background:var(--card);padding:9px 11px}
+  .theme .label .nm{font-size:13.5px;font-weight:700}
+  .theme .label .for{font-size:11px;color:var(--muted);margin-top:1px}
+  .selnote{margin-top:14px;font-size:13px;color:var(--muted);min-height:18px}
+  .selnote b{color:var(--text)}
+
+  .intake{margin-top:18px;display:flex;flex-direction:column;gap:11px;text-align:left}
+  .intake label{font-size:12.5px;color:var(--muted);margin-bottom:-5px}
+  .intake input, .intake textarea{
+    width:100%;background:var(--card);border:1px solid var(--line);border-radius:12px;
+    color:var(--text);font-size:16px;padding:13px 14px;font-family:inherit}
+  .intake input:focus, .intake textarea:focus{outline:none;border-color:#58a6ff}
+  .intake textarea{min-height:70px;resize:vertical}
+  .sendrow{display:flex;gap:10px;margin-top:4px}
+  .send{flex:1;border:none;cursor:pointer;border-radius:14px;padding:15px;
+    font-size:15px;font-weight:700;color:#fff;display:flex;align-items:center;
+    justify-content:center;gap:8px;transition:transform .12s ease,filter .2s}
+  .send:active{transform:scale(.98)}
+  .send.wa{background:#25d366}
+  .send.em{background:linear-gradient(135deg,#2563eb,#1d4ed8)}
+  .send:hover{filter:brightness(1.07)}
+  .privacy{margin-top:14px;font-size:11.5px;color:var(--muted);line-height:1.5;
+    background:var(--card);border:1px solid var(--line);border-radius:12px;padding:11px 13px}
+  .privacy b{color:#7dd3fc}
 </style>
 </head>
 <body>
@@ -62,6 +103,38 @@
     <div class="loc">📍 Dublin, Ireland</div>
 
     <div class="links" id="links"></div>
+
+    <!-- ===== Digital card business ===== -->
+    <div class="sec">
+      <h2>Want a card like this?</h2>
+      <p class="lead">I build clean digital cards for nail techs, barbers, food
+        traders, trades and freelancers. One link + QR for your photo, contact,
+        socials, work and products. Pick a style below.</p>
+      <span class="price">from <b>&euro;30</b> &middot; live in a day</span>
+
+      <div class="themes" id="themes"></div>
+      <p class="selnote" id="selnote">Tap a style you like.</p>
+
+      <div class="intake">
+        <label>Your name</label>
+        <input id="f_name" type="text" placeholder="e.g. Jane" />
+        <label>What you do</label>
+        <input id="f_trade" type="text" placeholder="e.g. Nail tech, barber, food stall" />
+        <label>Best way to reach you</label>
+        <input id="f_contact" type="text" placeholder="WhatsApp / IG / email" />
+        <label>Anything else? (optional)</label>
+        <textarea id="f_note" placeholder="What's it for, links you want, etc."></textarea>
+
+        <div class="sendrow">
+          <button class="send wa" onclick="sendWA()">WhatsApp it</button>
+          <button class="send em" onclick="sendEmail()">Email it</button>
+        </div>
+      </div>
+
+      <p class="privacy">🔒 <b>Privacy:</b> your details are used only to build your
+        card, stored in the EU, and deleted on request. I built Terms Guard AI, an
+        EU-privacy tool, so this part actually matters to me.</p>
+    </div>
 
     <div class="foot">
       MSc Artificial Intelligence &middot; National College of Ireland<br/>
@@ -111,6 +184,65 @@ wrap.innerHTML = LINKS.map(l => `
     <span class="meta"><span>${l.title}</span><small>${l.sub}</small></span>
     <span class="arrow">›</span>
   </a>`).join("");
+
+/* ============================================================
+   DIGITAL CARD — themes + intake.
+   To add a theme: copy a block, set name/for/bg/fg/accent.
+   Your contact: change WA_NUMBER (intl, no +) and EMAIL below.
+   ============================================================ */
+const WA_NUMBER = "353870042838";        // WhatsApp, international, no '+'
+const EMAIL     = "alabitaiwo625@gmail.com";
+
+const THEMES = [
+  { id:"salon",  name:"Salon",  for:"Nails, beauty, wellness", bg:"#F9F5F0", fg:"#4A4A4A", accent:"#C98B8B" },
+  { id:"shop",   name:"Shop",   for:"Freelance, retail, admin", bg:"#FFFFFF", fg:"#1F2022", accent:"#2B2D42" },
+  { id:"market", name:"Market", for:"Food, cafes, fitness",     bg:"#FFF9E6", fg:"#1D3557", accent:"#E63946" },
+  { id:"yard",   name:"Yard",   for:"Trades, barbers, builders",bg:"#1A1A1A", fg:"#F5F5F5", accent:"#D4A373" },
+  { id:"studio", name:"Studio", for:"Tech, creatives, DJs",     bg:"#0D1117", fg:"#C9D1D9", accent:"#58A6FF" },
+];
+
+let chosen = null;
+const tWrap = document.getElementById("themes");
+const note  = document.getElementById("selnote");
+
+tWrap.innerHTML = THEMES.map(t => `
+  <div class="theme" data-id="${t.id}" onclick="pickTheme('${t.id}')">
+    <div class="swatch" style="background:${t.bg};color:${t.fg}">
+      <span style="border-bottom:3px solid ${t.accent};padding-bottom:2px">${t.name}</span>
+    </div>
+    <div class="label"><div class="nm">${t.name}</div><div class="for">${t.for}</div></div>
+  </div>`).join("");
+
+function pickTheme(id){
+  chosen = THEMES.find(t => t.id === id);
+  document.querySelectorAll(".theme").forEach(el =>
+    el.classList.toggle("sel", el.dataset.id === id));
+  note.innerHTML = `Style: <b>${chosen.name}</b> &mdash; nice choice. Fill in below and send.`;
+}
+
+function buildMessage(){
+  const name    = (document.getElementById("f_name").value || "").trim();
+  const trade   = (document.getElementById("f_trade").value || "").trim();
+  const contact = (document.getElementById("f_contact").value || "").trim();
+  const noteTxt = (document.getElementById("f_note").value || "").trim();
+  let m = "Hi Taiwo, I'd like a digital card.\n";
+  m += "Style: " + (chosen ? chosen.name : "(not picked yet)") + "\n";
+  if(name)    m += "Name: " + name + "\n";
+  if(trade)   m += "What I do: " + trade + "\n";
+  if(contact) m += "Reach me: " + contact + "\n";
+  if(noteTxt) m += "Note: " + noteTxt + "\n";
+  return m;
+}
+
+function sendWA(){
+  window.open("https://wa.me/" + WA_NUMBER + "?text=" + encodeURIComponent(buildMessage()), "_blank");
+}
+function sendEmail(){
+  const subj = "Digital card request" + (chosen ? " — " + chosen.name : "");
+  window.location.href = "mailto:" + EMAIL +
+    "?subject=" + encodeURIComponent(subj) +
+    "&body=" + encodeURIComponent(buildMessage());
+}
 </script>
 </body>
 </html>
