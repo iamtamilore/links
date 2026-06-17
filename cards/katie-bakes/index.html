@@ -7,98 +7,111 @@
 <meta name="description" content="Katie&#x27;s Bakes - Handmade cakes &amp; treats, baked fresh in Dublin" />
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Lato&family=Inter:wght@400;700;800&family=Montserrat:wght@700;800&family=Open+Sans&family=Roboto+Slab:wght@700&family=Roboto&family=Space+Grotesk:wght@700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&family=Lato:wght@400;700&family=Inter:wght@400;500;600;700;800&family=Montserrat:wght@600;700;800&family=Open+Sans:wght@400;600&family=Roboto+Slab:wght@600;700&family=Roboto:wght@400;500;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&display=swap" rel="stylesheet">
 <style>
-  /* ---- THEME (one of: salon shop market yard studio) ---- */
-  :root{
-    /* default = studio; the generator sets body[data-theme] */
-    --bg:#0D1117; --grad:#16243f; --text:#C9D1D9; --muted:#8b97a5;
-    --card:rgba(255,255,255,.06); --line:rgba(255,255,255,.14); --accent:#58A6FF;
-    --hfont:"Space Grotesk",sans-serif; --bfont:"Inter",sans-serif; --oncard:#fff;
+  /* ---- THEME TOKENS (one of: salon shop market yard studio) ---- */
+  :root{ /* default = studio */
+    --bg:#0D1117; --text:#C9D1D9; --muted:#8b97a5; --card:#161B22;
+    --line:#30363D; --accent:#58A6FF; --oncard:#0D1117;
+    --hfont:"Space Grotesk",sans-serif; --bfont:"Inter",sans-serif;
   }
-  body[data-theme="salon"]{ --bg:#F9F5F0;--grad:#F3E7E0;--text:#4A4A4A;--muted:#8a7d77;
-    --card:rgba(0,0,0,.04);--line:rgba(0,0,0,.10);--accent:#C98B8B;
-    --hfont:"Playfair Display",serif;--bfont:"Lato",sans-serif;--oncard:#fff; }
-  body[data-theme="shop"]{ --bg:#FFFFFF;--grad:#EEF1F6;--text:#1F2022;--muted:#5b6168;
-    --card:rgba(0,0,0,.04);--line:rgba(0,0,0,.10);--accent:#2B2D42;
-    --hfont:"Inter",sans-serif;--bfont:"Inter",sans-serif;--oncard:#fff; }
-  body[data-theme="market"]{ --bg:#FFF9E6;--grad:#FBEFC9;--text:#1D3557;--muted:#5d6b80;
-    --card:rgba(0,0,0,.04);--line:rgba(0,0,0,.10);--accent:#E63946;
-    --hfont:"Montserrat",sans-serif;--bfont:"Open Sans",sans-serif;--oncard:#fff; }
-  body[data-theme="yard"]{ --bg:#1A1A1A;--grad:#2a2a2a;--text:#F5F5F5;--muted:#a9a39c;
-    --card:rgba(255,255,255,.06);--line:rgba(255,255,255,.14);--accent:#D4A373;
-    --hfont:"Roboto Slab",serif;--bfont:"Roboto",sans-serif;--oncard:#1a1a1a; }
-  body[data-theme="studio"]{ --bg:#0D1117;--grad:#16243f;--text:#C9D1D9;--muted:#8b97a5;
-    --card:rgba(255,255,255,.06);--line:rgba(255,255,255,.14);--accent:#58A6FF;
-    --hfont:"Space Grotesk",sans-serif;--bfont:"Inter",sans-serif;--oncard:#fff; }
+  body[data-theme="salon"]{ --bg:#F9F5F0; --text:#4A4A4A; --muted:#847373; --card:#F3E7E0;
+    --line:rgba(0,0,0,.09); --accent:#C98B8B; --oncard:#fff;
+    --hfont:"Playfair Display",serif; --bfont:"Lato",sans-serif; }
+  body[data-theme="shop"]{ --bg:#FFFFFF; --text:#1F2022; --muted:#5b6168; --card:#F9F9F9;
+    --line:rgba(0,0,0,.08); --accent:#2B2D42; --oncard:#fff;
+    --hfont:"Inter",sans-serif; --bfont:"Inter",sans-serif; }
+  body[data-theme="market"]{ --bg:#FFF9E6; --text:#1D3557; --muted:#5d6b80; --card:#FBEFC9;
+    --line:rgba(0,0,0,.09); --accent:#E63946; --oncard:#fff;
+    --hfont:"Montserrat",sans-serif; --bfont:"Open Sans",sans-serif; }
+  body[data-theme="yard"]{ --bg:#1A1A1A; --text:#F5F5F5; --muted:#a9a39c; --card:#242424;
+    --line:rgba(255,255,255,.13); --accent:#D4A373; --oncard:#1A1A1A;
+    --hfont:"Roboto Slab",serif; --bfont:"Roboto",sans-serif; }
+  body[data-theme="studio"]{ --bg:#0D1117; --text:#C9D1D9; --muted:#8b97a5; --card:#161B22;
+    --line:#30363D; --accent:#58A6FF; --oncard:#0D1117;
+    --hfont:"Space Grotesk",sans-serif; --bfont:"Inter",sans-serif; }
 
   *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
-  body{font-family:var(--bfont);color:var(--text);min-height:100vh;
-    background:radial-gradient(1200px 600px at 50% -10%, var(--grad) 0%, var(--bg) 55%) fixed;
-    display:flex;justify-content:center;padding:40px 18px 60px;}
-  .wrap{width:100%;max-width:460px;text-align:center}
+  html{-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;text-rendering:optimizeLegibility}
+  body{font-family:var(--bfont);color:var(--text);background:var(--bg);
+    min-height:100vh;display:flex;justify-content:center;padding:40px 20px 56px;
+    line-height:1.6;}
+  .material-symbols-outlined{font-size:21px;line-height:1}
+  .wrap{width:100%;max-width:440px;display:flex;flex-direction:column;align-items:center}
   h1,h2{font-family:var(--hfont)}
 
-  .avatar{width:118px;height:118px;border-radius:50%;object-fit:cover;
-    border:3px solid var(--accent);box-shadow:0 10px 30px rgba(0,0,0,.30);
-    margin:0 auto 14px;display:block;background:var(--card)}
-  h1{font-size:25px;font-weight:800;letter-spacing:-.3px}
-  .tag{color:var(--muted);font-size:14.5px;margin-top:6px;line-height:1.5}
-  .loc{display:inline-flex;gap:6px;color:var(--muted);font-size:13px;margin-top:11px;
-    background:var(--card);border:1px solid var(--line);border-radius:20px;padding:5px 13px}
+  /* ---- header ---- */
+  .avatar-ring{width:118px;height:118px;border-radius:50%;padding:3px;background:var(--accent);
+    margin-bottom:14px;flex:none}
+  .avatar{width:100%;height:100%;border-radius:50%;object-fit:cover;display:block;
+    border:2px solid var(--bg);background:var(--card)}
+  h1{font-size:30px;font-weight:600;letter-spacing:-.01em;text-align:center;line-height:1.15}
+  .tag{color:var(--muted);font-size:16px;margin-top:8px;text-align:center;max-width:300px}
+  .loc{display:inline-flex;align-items:center;gap:6px;color:var(--muted);font-size:13px;
+    margin-top:14px;background:var(--card);border:1px solid var(--line);
+    border-radius:999px;padding:6px 14px;font-weight:600;letter-spacing:.03em}
+  .loc .material-symbols-outlined{font-size:16px}
 
-  /* action buttons */
-  .acts{margin-top:20px;display:flex;flex-direction:column;gap:11px}
-  .acts a{display:flex;align-items:center;gap:13px;text-decoration:none;color:var(--text);
-    background:var(--card);border:1px solid var(--line);border-radius:15px;
-    padding:14px 17px;font-size:15.5px;font-weight:600;transition:transform .12s,filter .2s}
+  /* ---- action buttons ---- */
+  .acts{margin-top:26px;width:100%;display:flex;flex-direction:column;gap:12px}
+  .acts a{display:flex;align-items:center;justify-content:center;gap:10px;height:52px;
+    text-decoration:none;border-radius:14px;font-size:14px;font-weight:700;
+    letter-spacing:.03em;color:var(--text);background:var(--card);
+    border:1px solid var(--line);
+    transition:transform .15s ease, filter .2s ease, background-color .2s ease;}
+  .acts a:hover{filter:brightness(.98)}
   .acts a:active{transform:scale(.98)}
-  .acts a.primary{background:var(--accent);color:var(--oncard);border-color:transparent}
-  .acts a.primary:hover{filter:brightness(1.08)}
-  .acts a .ico{flex:none;width:34px;height:34px;border-radius:10px;display:flex;
-    align-items:center;justify-content:center;font-size:17px;background:rgba(127,127,127,.12)}
-  .acts a.primary .ico{background:rgba(255,255,255,.20)}
-  .acts a .arrow{margin-left:auto;opacity:.6;font-size:17px}
+  .acts a:focus-visible{outline:none;box-shadow:0 0 0 2px var(--bg),0 0 0 4px var(--accent)}
+  .acts a.primary{background:var(--accent);color:var(--oncard);border-color:transparent;
+    box-shadow:0 6px 18px rgba(0,0,0,.10)}
+  .acts a.primary:hover{filter:brightness(1.06)}
 
-  /* section heading */
-  .sechead{margin:34px 0 4px;font-size:18px;font-weight:800;text-align:left}
+  /* ---- section heading ---- */
+  .sechead{margin:40px 0 0;font-size:22px;font-weight:600;text-align:center;
+    width:100%;border-bottom:1px solid var(--line);padding-bottom:14px}
 
-  /* PRODUCT GALLERY - full image, NOT cropped */
-  .gallery{margin-top:14px;display:grid;grid-template-columns:1fr 1fr;gap:12px}
-  .item{background:var(--card);border:1px solid var(--line);border-radius:15px;
-    overflow:hidden;text-align:left;cursor:pointer;transition:transform .12s}
-  .item:active{transform:scale(.98)}
-  .item .imgbox{width:100%;aspect-ratio:1/1;background:rgba(127,127,127,.08);
-    display:flex;align-items:center;justify-content:center;overflow:hidden}
-  /* contain = whole product visible (no edges chopped). cover would crop. */
-  .item img{width:100%;height:100%;object-fit:cover;display:block}
-  .item .cap{padding:9px 11px}
-  .item .cap .nm{font-size:13.5px;font-weight:700;line-height:1.2}
-  .item .cap .pr{font-size:12.5px;color:var(--accent);font-weight:700;margin-top:2px}
+  /* ---- gallery ---- */
+  .gallery{margin-top:20px;width:100%;display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  .item{background:var(--card);border:1px solid var(--line);border-radius:14px;
+    overflow:hidden;cursor:pointer;display:flex;flex-direction:column;
+    transition:transform .25s ease, box-shadow .25s ease}
+  .item:hover{transform:translateY(-4px);box-shadow:0 10px 24px rgba(0,0,0,.12)}
+  .item:active{transform:scale(.99)}
+  .item .imgbox{width:100%;aspect-ratio:1/1;overflow:hidden;background:var(--bg)}
+  .item img{width:100%;height:100%;object-fit:cover;display:block;
+    transition:transform .5s ease}
+  .item:hover img{transform:scale(1.05)}
+  .item .cap{padding:12px}
+  .item .cap .nm{font-size:14px;font-weight:700;line-height:1.25}
+  .item .cap .pr{font-size:13px;color:var(--muted);font-weight:700;margin-top:3px}
 
-  /* lightbox (tap to enlarge, full uncropped) */
-  .lb{position:fixed;inset:0;display:none;align-items:center;justify-content:center;
-    background:rgba(0,0,0,.88);z-index:60;padding:20px;flex-direction:column}
+  /* ---- lightbox (full uncropped image) ---- */
+  .lb{position:fixed;inset:0;display:none;flex-direction:column;align-items:center;
+    justify-content:center;background:rgba(0,0,0,.9);z-index:60;padding:22px}
   .lb.show{display:flex}
   .lb img{max-width:100%;max-height:78vh;object-fit:contain;border-radius:12px}
-  .lb .cap{color:#fff;margin-top:14px;text-align:center}
-  .lb .cap .nm{font-size:17px;font-weight:700}
-  .lb .cap .pr{color:var(--accent);font-weight:700;margin-top:3px}
-  .lb .x{position:absolute;top:18px;right:20px;color:#fff;font-size:30px;cursor:pointer;
-    background:rgba(255,255,255,.15);width:42px;height:42px;border-radius:50%;
-    display:flex;align-items:center;justify-content:center}
+  .lb .cap{color:#fff;margin-top:16px;text-align:center}
+  .lb .cap .nm{font-size:18px;font-weight:700}
+  .lb .cap .pr{color:var(--accent);font-weight:700;margin-top:4px}
+  .lb .x{position:absolute;top:18px;right:20px;color:#fff;cursor:pointer;
+    background:rgba(255,255,255,.16);width:44px;height:44px;border-radius:50%;
+    display:flex;align-items:center;justify-content:center;font-size:24px}
 
-  .foot{margin-top:34px;color:var(--muted);font-size:12px;line-height:1.6;text-align:center}
+  /* ---- footer ---- */
+  .foot{margin-top:40px;width:100%;text-align:center;border-top:1px solid var(--line);
+    padding-top:18px;color:var(--muted);font-size:12.5px}
+  .foot #footcontact{font-weight:600;letter-spacing:.04em;text-transform:uppercase}
   .foot a{color:var(--accent);text-decoration:none}
-  .madeby{margin-top:8px;font-size:11px;opacity:.65}
+  .madeby{margin-top:10px;font-size:11px;opacity:.7}
 </style>
 </head>
 <body data-theme="salon">
   <div class="wrap">
-    <img class="avatar" src="photos/avatar.jpg" alt="Katie&#x27;s Bakes" />
+    <div class="avatar-ring"><img class="avatar" src="photos/avatar.jpg" alt="Katie&#x27;s Bakes" /></div>
     <h1>Katie&#x27;s Bakes</h1>
     <p class="tag">Handmade cakes &amp; treats, baked fresh in Dublin</p>
-    <div class="loc">📍 Dublin, Ireland</div>
+    <div class="loc"><span class="material-symbols-outlined">location_on</span>Dublin, Ireland</div>
 
     <div class="acts" id="acts"></div>
 
@@ -112,7 +125,7 @@
   </div>
 
   <div class="lb" id="lb" onclick="closeLb(event)">
-    <span class="x" onclick="closeLb(event,true)">×</span>
+    <span class="x material-symbols-outlined" onclick="closeLb(event,true)">close</span>
     <img id="lbimg" src="" alt="" />
     <div class="cap"><div class="nm" id="lbnm"></div><div class="pr" id="lbpr"></div></div>
   </div>
@@ -121,14 +134,15 @@
 /* The generator injects DATA below this line. */
 const DATA = {"actions": [{"type": "whatsapp", "label": "Order on WhatsApp", "url": "https://wa.me/353800000000"}, {"type": "instagram", "label": "Instagram", "url": "https://instagram.com/"}, {"type": "contact", "label": "Save my number", "url": "contact.vcf"}], "products": [{"img": "photos/01.jpg", "name": "Red Velvet", "price": "\u20ac28"}, {"img": "photos/02.jpg", "name": "Chocolate Fudge", "price": "\u20ac30"}, {"img": "photos/03.jpg", "name": "Vanilla Cupcakes", "price": "\u20ac18 / 6"}, {"img": "photos/04.jpg", "name": "Baked Cheesecake", "price": "\u20ac26"}], "footer": "Order yours: hello@katiesbakes.ie"};
 
-/* action buttons */
-const ICON = { phone:"📞", whatsapp:"💬", instagram:"📷", email:"✉️",
-  website:"🌐", book:"📅", tiktok:"🎵", facebook:"👍", map:"📍", contact:"➕" };
+/* action buttons - Material Symbols icon per type (no emoji = less "cheap" tell) */
+const ICON = { phone:"call", whatsapp:"chat", instagram:"photo_camera", email:"mail",
+  website:"language", book:"calendar_month", tiktok:"music_note", facebook:"thumb_up",
+  map:"location_on", contact:"person_add" };
 const acts = document.getElementById("acts");
 acts.innerHTML = (DATA.actions||[]).map((a,i)=>`
   <a class="${i===0?'primary':''}" href="${a.url}" target="_blank" rel="noopener">
-    <span class="ico">${ICON[a.type]||"🔗"}</span>
-    <span>${a.label}</span><span class="arrow">›</span>
+    <span class="material-symbols-outlined">${ICON[a.type]||"link"}</span>
+    <span>${a.label}</span>
   </a>`).join("");
 
 /* gallery */
@@ -157,6 +171,7 @@ function openLb(i){
 function closeLb(e,force){
   if(force || e.target.id==="lb"){ document.getElementById("lb").classList.remove("show"); }
 }
+document.addEventListener("keydown",e=>{ if(e.key==="Escape") document.getElementById("lb").classList.remove("show"); });
 
 /* footer contact */
 if(DATA.footer) document.getElementById("footcontact").innerHTML = DATA.footer;
