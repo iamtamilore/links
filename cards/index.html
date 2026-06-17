@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Taiwo Alabi</title>
+<meta name="description" content="Taiwo Alabi - AI builder. LinkedIn and live AI projects." />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Lato&family=Inter:wght@400;700;800&family=Montserrat:wght@700;800&family=Open+Sans&family=Roboto+Slab:wght@700&family=Roboto&family=Space+Grotesk:wght@700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg1:#0b1220; --bg2:#16243f; --card:rgba(255,255,255,.06);
+    --line:rgba(255,255,255,.14); --text:#eef3fb; --muted:#9fb0c8; --accent:#3b82f6;
+    --hfont:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
+    --bfont:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
+    --grad:#1e3a6b;
+  }
+  /* ---- LIVE THEME PREVIEW: tapping a theme re-skins the whole page ---- */
+  body[data-theme="salon"]{ --bg1:#F9F5F0; --grad:#F3E7E0; --text:#4A4A4A; --muted:#8a7d77;
+    --card:rgba(0,0,0,.04); --line:rgba(0,0,0,.10); --accent:#C98B8B;
+    --hfont:"Playfair Display",serif; --bfont:"Lato",sans-serif; }
+  body[data-theme="shop"]{ --bg1:#FFFFFF; --grad:#EEF1F6; --text:#1F2022; --muted:#5b6168;
+    --card:rgba(0,0,0,.04); --line:rgba(0,0,0,.10); --accent:#2B2D42;
+    --hfont:"Inter",sans-serif; --bfont:"Inter",sans-serif; }
+  body[data-theme="market"]{ --bg1:#FFF9E6; --grad:#FBEFC9; --text:#1D3557; --muted:#5d6b80;
+    --card:rgba(0,0,0,.04); --line:rgba(0,0,0,.10); --accent:#E63946;
+    --hfont:"Montserrat",sans-serif; --bfont:"Open Sans",sans-serif; }
+  body[data-theme="yard"]{ --bg1:#1A1A1A; --grad:#2a2a2a; --text:#F5F5F5; --muted:#a9a39c;
+    --card:rgba(255,255,255,.06); --line:rgba(255,255,255,.14); --accent:#D4A373;
+    --hfont:"Roboto Slab",serif; --bfont:"Roboto",sans-serif; }
+  body[data-theme="studio"]{ --bg1:#0D1117; --grad:#16243f; --text:#C9D1D9; --muted:#8b97a5;
+    --card:rgba(255,255,255,.06); --line:rgba(255,255,255,.14); --accent:#58A6FF;
+    --hfont:"Space Grotesk",sans-serif; --bfont:"Inter",sans-serif; }
+
+  *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+  html{ text-rendering:optimizeLegibility; -webkit-font-smoothing:antialiased;
+        -moz-osx-font-smoothing:grayscale; }
+  body{
+    font-family:var(--bfont);
+    color:var(--text); min-height:100vh;
+    background:radial-gradient(1200px 600px at 50% -10%, var(--grad) 0%, var(--bg1) 55%) fixed;
+    display:flex; justify-content:center; padding:42px 18px 60px;
+    transition:background .4s ease, color .3s ease;
+  }
+  h1,h2,.toast h3{font-family:var(--hfont)}
+  .wrap{width:100%; max-width:460px; text-align:center}
+
+  .avatar{
+    width:120px;height:120px;border-radius:50%;object-fit:cover;
+    border:3px solid rgba(255,255,255,.85);
+    box-shadow:0 10px 30px rgba(0,0,0,.45); margin:0 auto 16px; display:block;
+  }
+  h1{font-size:30px;font-weight:800;letter-spacing:-.3px}
+  .tag{color:var(--muted);font-size:17px;margin-top:6px;line-height:1.5}
+  .loc{display:inline-flex;align-items:center;gap:6px;color:var(--muted);
+    font-size:13px;margin-top:12px;background:var(--card);border:1px solid var(--line);
+    border-radius:20px;padding:5px 13px}
+
+  .links{margin-top:26px;display:flex;flex-direction:column;gap:13px}
+  a.btn{
+    display:flex;align-items:center;gap:14px;text-decoration:none;color:var(--text);
+    background:var(--card);border:1px solid var(--line);border-radius:16px;
+    padding:15px 18px;font-size:17.5px;font-weight:600;
+    transition:transform .12s ease, background .2s ease, border-color .2s ease;
+    backdrop-filter:blur(8px);
+  }
+  a.btn:hover{transform:translateY(-2px);background:rgba(255,255,255,.11);border-color:rgba(255,255,255,.3)}
+  a.btn:active{transform:scale(.98)}
+  a.btn .ico{flex:none;width:38px;height:38px;border-radius:11px;display:flex;
+    align-items:center;justify-content:center;font-size:19px;background:rgba(255,255,255,.10)}
+  a.btn .meta{display:flex;flex-direction:column;align-items:flex-start;line-height:1.25}
+  a.btn .meta small{color:var(--muted);font-weight:500;font-size:13.5px}
+  a.btn .arrow{margin-left:auto;color:var(--muted);font-size:18px}
+
+  .primary{background:var(--accent);border-color:transparent;color:#fff}
+  .primary .ico{background:rgba(255,255,255,.20)}
+  .primary .meta small{color:rgba(255,255,255,.8)}
+  .primary .arrow{color:rgba(255,255,255,.8)}
+  .primary:hover{filter:brightness(1.08)}
+
+  .foot{margin-top:30px;color:var(--muted);font-size:12.5px;line-height:1.6}
+  .foot a{color:var(--accent);text-decoration:none}
+
+  /* ---- Digital card business section ---- */
+  .sec{margin-top:46px;padding-top:30px;border-top:1px solid var(--line)}
+  .sec h2{font-size:21px;font-weight:800;letter-spacing:-.2px}
+  .sec .lead{color:var(--muted);font-size:14px;margin-top:8px;line-height:1.55}
+  .price{display:inline-block;margin-top:14px;background:var(--card);
+    border:1px solid var(--line);border-radius:20px;padding:6px 15px;
+    font-size:13px;color:var(--text)}
+  .price b{color:#7dd3fc}
+  .incl{list-style:none;margin:16px 0 0;padding:0;text-align:left;display:flex;
+    flex-direction:column;gap:9px}
+  .incl li{font-size:13.5px;color:var(--muted);line-height:1.4}
+  .incl li b{color:var(--text)}
+  .example{margin-top:12px;font-size:13px;color:var(--muted);text-align:left}
+  .example a{color:#7dd3fc;text-decoration:none;font-weight:700}
+
+  /* click-to-play demo video */
+  .demo{margin:18px auto 4px;max-width:300px;border-radius:18px;overflow:hidden;
+    position:relative;cursor:pointer;border:1px solid var(--line);
+    box-shadow:0 10px 30px rgba(0,0,0,.4);aspect-ratio:9/16;background:#0b1220}
+  .demo img{width:100%;height:100%;object-fit:cover;display:block}
+  .demo .play{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;
+    background:linear-gradient(transparent 40%, rgba(0,0,0,.35))}
+  .demo .play .btn-play{width:66px;height:66px;border-radius:50%;background:rgba(255,255,255,.92);
+    display:flex;align-items:center;justify-content:center;box-shadow:0 6px 20px rgba(0,0,0,.4);
+    transition:transform .12s ease}
+  .demo:hover .btn-play{transform:scale(1.08)}
+  .demo .play .btn-play::after{content:"";border-left:20px solid #111;border-top:13px solid transparent;
+    border-bottom:13px solid transparent;margin-left:5px}
+  .demo .lbl{position:absolute;left:0;right:0;bottom:12px;text-align:center;color:#fff;
+    font-size:13px;font-weight:700;text-shadow:0 1px 6px rgba(0,0,0,.6)}
+  .demohint{font-size:12px;color:var(--muted);margin-top:6px}
+
+  /* video lightbox player */
+  .vlb{position:fixed;inset:0;background:rgba(0,0,0,.92);display:none;align-items:center;
+    justify-content:center;z-index:10000;padding:20px}
+  .vlb.open{display:flex}
+  .vlb video{max-width:94vw;max-height:86vh;border-radius:14px;background:#000;
+    box-shadow:0 20px 60px rgba(0,0,0,.7)}
+  .vlb .vx{position:absolute;top:18px;right:20px;width:46px;height:46px;border-radius:50%;
+    background:rgba(255,255,255,.16);color:#fff;border:none;font-size:24px;cursor:pointer;
+    display:flex;align-items:center;justify-content:center}
+
+  .qrshow{margin-top:18px;display:flex;gap:14px;align-items:center;justify-content:center;
+    background:var(--card);border:1px solid var(--line);border-radius:16px;padding:14px}
+  .qrshow img.wp{height:150px;border-radius:12px;box-shadow:0 6px 18px rgba(0,0,0,.35);cursor:zoom-in;transition:transform .12s ease}
+  .qrshow img.qr{height:96px;width:96px;border-radius:10px;background:#fff;padding:6px;cursor:zoom-in;transition:transform .12s ease}
+  .qrshow img.wp:hover,.qrshow img.qr:hover{transform:scale(1.04)}
+
+  /* full-screen lightbox for QR / wallpaper */
+  .lb{position:fixed;inset:0;background:rgba(0,0,0,.88);display:none;align-items:center;
+    justify-content:center;z-index:9999;padding:24px;cursor:zoom-out;backdrop-filter:blur(4px)}
+  .lb.open{display:flex}
+  .lb img{max-width:92vw;max-height:82vh;border-radius:14px;background:#fff;padding:10px;
+    box-shadow:0 20px 60px rgba(0,0,0,.6)}
+  .lb .x{position:absolute;top:18px;right:20px;width:44px;height:44px;border-radius:50%;
+    background:rgba(255,255,255,.14);color:#fff;border:none;font-size:22px;cursor:pointer;
+    display:flex;align-items:center;justify-content:center}
+  .lb .hint{position:absolute;bottom:26px;left:0;right:0;text-align:center;color:#cfd8e3;
+    font-size:13px}
+  .qrshow .cap{font-size:12.5px;color:var(--muted);text-align:left;line-height:1.45}
+  .qrshow .cap b{color:var(--text)}
+
+  .themes{margin-top:22px;display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  .theme{cursor:pointer;border:2px solid transparent;border-radius:16px;overflow:hidden;
+    text-align:left;transition:transform .12s ease, border-color .2s ease}
+  .theme:active{transform:scale(.98)}
+  .theme.sel{border-color:#58a6ff;box-shadow:0 0 0 3px rgba(88,166,255,.25)}
+  .theme .swatch{height:74px;display:flex;align-items:center;justify-content:center;
+    font-size:15px;font-weight:700}
+  .theme .label{background:var(--card);padding:9px 11px}
+  .theme .label .nm{font-size:13.5px;font-weight:700}
+  .theme .label .for{font-size:11px;color:var(--muted);margin-top:1px}
+  .selnote{margin-top:14px;font-size:13px;color:var(--muted);min-height:18px}
+  .selnote b{color:var(--text)}
+
+  .intake{margin-top:18px;display:flex;flex-direction:column;gap:11px;text-align:left}
+  .intake label{font-size:12.5px;color:var(--muted);margin-bottom:-5px}
+  .intake input, .intake textarea{
+    width:100%;background:var(--card);border:1px solid var(--line);border-radius:12px;
+    color:var(--text);font-size:16px;padding:13px 14px;font-family:inherit}
+  .intake input:focus, .intake textarea:focus{outline:none;border-color:#58a6ff}
+  .intake textarea{min-height:70px;resize:vertical}
+  .sendrow{display:flex;gap:10px;margin-top:4px}
+  .send{flex:1;border:none;cursor:pointer;border-radius:14px;padding:15px;
+    font-size:15px;font-weight:700;color:#fff;display:flex;align-items:center;
+    justify-content:center;gap:8px;transition:transform .12s ease,filter .2s}
+  .send:active{transform:scale(.98)}
+  .send.wa{background:#25d366}
+  .send.em{background:linear-gradient(135deg,#2563eb,#1d4ed8)}
+  .send:hover{filter:brightness(1.07)}
+  .mailpick{display:none;flex-direction:column;gap:8px;margin-top:10px;
+    background:var(--card);border:1px solid var(--line);border-radius:14px;padding:12px}
+  .mailpick.show{display:flex}
+  .mailpick p{font-size:12px;color:var(--muted);margin:0 0 2px}
+  .mailpick button{background:rgba(255,255,255,.06);border:1px solid var(--line);
+    color:var(--text);font-size:14.5px;font-weight:600;padding:12px;border-radius:11px;
+    cursor:pointer;text-align:left;font-family:inherit}
+  .mailpick button:hover{background:rgba(255,255,255,.12)}
+  .mailpick button:active{transform:scale(.99)}
+  .privacy{margin-top:14px;font-size:11.5px;color:var(--muted);line-height:1.5;
+    background:var(--card);border:1px solid var(--line);border-radius:12px;padding:11px 13px}
+  .privacy b{color:#7dd3fc}
+
+  /* live-preview banner */
+  .previewbar{position:fixed;top:0;left:0;right:0;z-index:40;display:none;
+    align-items:center;justify-content:center;gap:12px;
+    background:var(--accent);color:#fff;padding:9px 14px;font-size:13px;font-weight:700;
+    box-shadow:0 4px 16px rgba(0,0,0,.3)}
+  .previewbar.show{display:flex}
+  .previewbar button{background:rgba(255,255,255,.22);border:none;color:#fff;
+    font-weight:700;font-size:12.5px;padding:6px 12px;border-radius:20px;cursor:pointer}
+  body.previewing{padding-top:54px}
+
+  /* confirmation toast */
+  .toast{position:fixed;inset:0;display:none;align-items:center;justify-content:center;
+    background:rgba(5,10,20,.72);backdrop-filter:blur(4px);z-index:50;padding:24px}
+  .toast.show{display:flex}
+  .toast .box{max-width:360px;width:100%;background:#10192e;border:1px solid var(--line);
+    border-radius:20px;padding:26px 22px;text-align:center;box-shadow:0 20px 60px rgba(0,0,0,.5)}
+  .toast .tick{width:56px;height:56px;border-radius:50%;background:#25d366;margin:0 auto 14px;
+    display:flex;align-items:center;justify-content:center;font-size:30px}
+  .toast h3{font-size:19px;font-weight:800}
+  .toast p{color:var(--muted);font-size:14px;line-height:1.55;margin-top:10px}
+  .toast .who{display:flex;align-items:center;gap:10px;justify-content:center;margin-top:16px;
+    background:var(--card);border:1px solid var(--line);border-radius:14px;padding:10px 12px}
+  .toast .who img{width:40px;height:40px;border-radius:50%;object-fit:cover}
+  .toast .who .nm{font-size:13.5px;font-weight:700;text-align:left}
+  .toast .who .nm small{display:block;color:var(--muted);font-weight:500;font-size:11.5px}
+  .toast .close{margin-top:18px;width:100%;border:none;cursor:pointer;border-radius:13px;
+    padding:13px;font-size:15px;font-weight:700;color:#fff;
+    background:linear-gradient(135deg,#2563eb,#1d4ed8)}
+  .toast .alt{margin-top:12px;font-size:12px;color:var(--muted)}
+  .toast .alt a{color:#7dd3fc;text-decoration:none}
+</style>
+</head>
+<body>
+  <div class="previewbar" id="previewbar">
+    <span id="previewlabel">Previewing a style</span>
+    <button onclick="resetTheme()">Reset ↺</button>
+  </div>
+
+  <div class="wrap">
+    <img class="avatar" src="../avatar.jpg" alt="Taiwo Alabi" />
+    <h1>Taiwo Alabi</h1>
+    <p class="tag" id="tagline">I build AI tools that solve real problems.</p>
+    <div class="loc">📍 Dublin, Ireland</div>
+
+    <div class="links" id="links"></div>
+
+    <!-- ===== Digital card business ===== -->
+    <div class="sec">
+      <h2>Want a card like this?</h2>
+      <p class="lead">One link + QR card for your business. Works for <b>any</b>
+        trade or person - just pick the look you like.</p>
+
+      <div class="demo" onclick="openVid()">
+        <img src="../demo_poster.jpg" alt="Watch the demo" loading="lazy" />
+        <div class="play"><div class="btn-play"></div></div>
+        <div class="lbl">See it in action</div>
+      </div>
+      <p class="demohint">▶ Tap to watch the 50-second demo</p>
+
+      <ul class="incl">
+        <li>📸 A <b>showcase gallery</b> of your work or products, with names &amp; prices</li>
+        <li>💬 One-tap <b>order / book on WhatsApp</b></li>
+        <li>➕ <b>Save-my-number</b> button + your socials &amp; links</li>
+        <li>🔳 Your own <b>QR code + phone wallpaper</b></li>
+      </ul>
+
+      <div class="qrshow">
+        <img class="wp" src="../lockscreen_wallpaper.png" alt="Example phone wallpaper with QR"
+             onclick="openLB('../lockscreen_wallpaper.png')" />
+        <img class="qr" src="../qr_only.png" alt="Example QR code"
+             onclick="openLB('../qr_only.png')" />
+        <span class="cap">You get a <b>QR code</b> + a matching <b>phone wallpaper</b>.
+          Set it as your lock screen &mdash; people scan it and land on your card.
+          <b>Tap to enlarge.</b></span>
+      </div>
+
+      <p class="example">See real examples:
+        <a href="wonderland-nails/" target="_blank">Wonderland Nails ↗</a> &middot;
+        <a href="style-club/" target="_blank">Style Club ↗</a></p>
+
+      <span class="price">from <b>&euro;30</b> &middot; live in a day</span>
+
+      <div class="themes" id="themes"></div>
+      <p class="selnote" id="selnote">Don't see your exact trade? Doesn't matter -
+        pick the style you like, or just send below and I'll suggest one.</p>
+
+      <div class="intake">
+        <label>Your name</label>
+        <input id="f_name" type="text" placeholder="Your name" />
+        <label>What you do</label>
+        <input id="f_trade" type="text" placeholder="e.g. Nail tech, barber, food stall" />
+        <label>What would you showcase? (your products / work)</label>
+        <input id="f_show" type="text" placeholder="e.g. cakes, nail sets, haircuts, photos" />
+        <label>Best way to reach you</label>
+        <input id="f_contact" type="text" placeholder="WhatsApp / IG / email" />
+        <label>Anything else? (optional)</label>
+        <textarea id="f_note" placeholder="What's it for, links you want, etc."></textarea>
+
+        <div class="sendrow">
+          <button class="send wa" onclick="sendWA()">WhatsApp it</button>
+          <button class="send em" onclick="toggleMail()">Email it ▾</button>
+        </div>
+        <div class="mailpick" id="mailpick">
+          <p>Send your email with:</p>
+          <button onclick="sendEmail('gmail')">📧 Gmail</button>
+          <button onclick="sendEmail('outlook')">📨 Outlook</button>
+          <button onclick="sendEmail('default')">✉️ My phone's mail app</button>
+        </div>
+      </div>
+
+      <p class="privacy">🔒 <b>Privacy:</b> your details are used only to build your
+        card, stored in the EU, and deleted on request. I built Terms Guard AI, an
+        EU-privacy tool, so this part actually matters to me.</p>
+    </div>
+
+    <div class="foot">
+      MSc Artificial Intelligence &middot; National College of Ireland<br/>
+      <a href="mailto:alabitaiwo625@gmail.com">alabitaiwo625@gmail.com</a>
+    </div>
+  </div>
+
+  <!-- confirmation -->
+  <div class="toast" id="toast">
+    <div class="box">
+      <div class="tick">✓</div>
+      <h3>Almost there!</h3>
+      <p>Make sure you hit <b>send</b> in the app that just opened. Then keep an eye
+         out - I'll personally message you back, usually within a day.</p>
+      <div class="who">
+        <img src="../avatar.jpg" alt="Taiwo" />
+        <div class="nm">Taiwo Alabi<small>This is me - same photo on WhatsApp</small></div>
+      </div>
+      <p class="alt">Prefer email? <a href="mailto:alabitaiwo625@gmail.com">alabitaiwo625@gmail.com</a></p>
+      <button class="close" onclick="hideToast()">Got it</button>
+    </div>
+  </div>
+
+  <!-- full-screen image lightbox (QR / wallpaper) -->
+  <div class="lb" id="lb" onclick="closeLB()">
+    <button class="x" onclick="closeLB();event.stopPropagation()">&times;</button>
+    <img id="lbimg" src="" alt="enlarged" onclick="event.stopPropagation()" />
+    <div class="hint">Tap anywhere to close</div>
+  </div>
+
+  <!-- video player lightbox -->
+  <div class="vlb" id="vlb">
+    <button class="vx" onclick="closeVid()">&times;</button>
+    <video id="vplayer" src="../demo.mp4" controls playsinline preload="none"></video>
+  </div>
+  <script>
+  function openVid(){
+    const v=document.getElementById("vlb"), p=document.getElementById("vplayer");
+    v.classList.add("open"); document.body.style.overflow="hidden";
+    p.currentTime=0; p.play().catch(()=>{});
+  }
+  function closeVid(){
+    const v=document.getElementById("vlb"), p=document.getElementById("vplayer");
+    p.pause(); v.classList.remove("open"); document.body.style.overflow="";
+  }
+  document.addEventListener("keydown",e=>{ if(e.key==="Escape") closeVid(); });
+  </script>
+
+<script>
+function openLB(src){
+  const lb=document.getElementById("lb");
+  document.getElementById("lbimg").src=src;
+  lb.classList.add("open");
+  document.body.style.overflow="hidden";
+}
+function closeLB(){
+  document.getElementById("lb").classList.remove("open");
+  document.body.style.overflow="";
+}
+document.addEventListener("keydown",e=>{ if(e.key==="Escape") closeLB(); });
+</script>
+<script>
+/* ============================================================
+   EDIT HERE - add / remove / reorder links anytime.
+   Each item: { icon, title, sub, url, primary(optional) }
+   Save the file, push to GitHub, done. The QR never changes.
+   ============================================================ */
+const LINKS = [
+  {
+    icon: "in",
+    title: "LinkedIn",
+    sub: "Connect with me",
+    url: "https://www.linkedin.com/in/tami-alabi/",
+    primary: true
+  },
+  {
+    icon: "🛡️",
+    title: "Terms Guard AI",
+    sub: "Reads any T&Cs, flags risky clauses (GDPR)",
+    url: "https://newtazer-terms-guard-ai.hf.space"
+  },
+  {
+    icon: "💻",
+    title: "GitHub",
+    sub: "See my code",
+    url: "https://github.com/iamtamilore"
+  },
+  // To add a new project, copy a block above and change the fields.
+];
+
+const wrap = document.getElementById("links");
+wrap.innerHTML = LINKS.map(l => `
+  <a class="btn ${l.primary ? 'primary' : ''}" href="${l.url}" target="_blank" rel="noopener">
+    <span class="ico">${l.icon}</span>
+    <span class="meta"><span>${l.title}</span><small>${l.sub}</small></span>
+    <span class="arrow">›</span>
+  </a>`).join("");
+
+/* ============================================================
+   DIGITAL CARD - themes + intake.
+   To add a theme: copy a block, set name/for/bg/fg/accent.
+   Your contact: change WA_NUMBER (intl, no +) and EMAIL below.
+   ============================================================ */
+const WA_NUMBER = "353870042838";        // WhatsApp, international, no '+'
+const EMAIL     = "alabitaiwo625@gmail.com";
+
+const THEMES = [
+  { id:"salon",  name:"Salon",  for:"Soft & elegant - beauty, wellness & more", bg:"#F9F5F0", fg:"#4A4A4A", accent:"#C98B8B" },
+  { id:"shop",   name:"Shop",   for:"Clean & professional - any business",      bg:"#FFFFFF", fg:"#1F2022", accent:"#2B2D42" },
+  { id:"market", name:"Market", for:"Bold & warm - food, events & more",        bg:"#FFF9E6", fg:"#1D3557", accent:"#E63946" },
+  { id:"yard",   name:"Yard",   for:"Strong & rugged - trades & more",          bg:"#1A1A1A", fg:"#F5F5F5", accent:"#D4A373" },
+  { id:"studio", name:"Studio", for:"Sleek & modern - creative & tech",         bg:"#0D1117", fg:"#C9D1D9", accent:"#58A6FF" },
+];
+
+let chosen = null;
+const tWrap = document.getElementById("themes");
+const note  = document.getElementById("selnote");
+
+tWrap.innerHTML = THEMES.map(t => `
+  <div class="theme" data-id="${t.id}" onclick="pickTheme('${t.id}')">
+    <div class="swatch" style="background:${t.bg};color:${t.fg}">
+      <span style="border-bottom:3px solid ${t.accent};padding-bottom:2px">${t.name}</span>
+    </div>
+    <div class="label"><div class="nm">${t.name}</div><div class="for">${t.for}</div></div>
+  </div>`).join("");
+
+function pickTheme(id){
+  chosen = THEMES.find(t => t.id === id);
+  document.querySelectorAll(".theme").forEach(el =>
+    el.classList.toggle("sel", el.dataset.id === id));
+  note.innerHTML = `Style: <b>${chosen.name}</b> - this is how your page would look. Fill in below and send.`;
+  // LIVE PREVIEW: re-skin the whole page
+  document.body.setAttribute("data-theme", id);
+  document.body.classList.add("previewing");
+  document.getElementById("previewbar").classList.add("show");
+  document.getElementById("previewlabel").textContent = "Previewing: " + chosen.name + " style";
+}
+function resetTheme(){
+  document.body.removeAttribute("data-theme");
+  document.body.classList.remove("previewing");
+  document.getElementById("previewbar").classList.remove("show");
+}
+
+function buildMessage(){
+  const name    = (document.getElementById("f_name").value || "").trim();
+  const trade   = (document.getElementById("f_trade").value || "").trim();
+  const show    = (document.getElementById("f_show").value || "").trim();
+  const contact = (document.getElementById("f_contact").value || "").trim();
+  const noteTxt = (document.getElementById("f_note").value || "").trim();
+  let m = "Hi Taiwo, I'd like a digital card.\n";
+  m += "Style: " + (chosen ? chosen.name : "(not picked yet)") + "\n";
+  if(name)    m += "Name: " + name + "\n";
+  if(trade)   m += "What I do: " + trade + "\n";
+  if(show)    m += "Showcase: " + show + "\n";
+  if(contact) m += "Reach me: " + contact + "\n";
+  if(noteTxt) m += "Note: " + noteTxt + "\n";
+  return m;
+}
+
+function showToast(){ document.getElementById("toast").classList.add("show"); }
+function hideToast(){ document.getElementById("toast").classList.remove("show"); }
+
+function sendWA(){
+  window.open("https://wa.me/" + WA_NUMBER + "?text=" + encodeURIComponent(buildMessage()), "_blank");
+  showToast();
+}
+
+function toggleMail(){
+  document.getElementById("mailpick").classList.toggle("show");
+}
+
+function sendEmail(provider){
+  const subj = "Digital card request" + (chosen ? " - " + chosen.name : "");
+  const body = buildMessage();
+  const S = encodeURIComponent(subj);
+  const B = encodeURIComponent(body);
+  const TO = encodeURIComponent(EMAIL);
+  let url;
+  if(provider === "gmail"){
+    // Gmail web compose - to + subject + body pre-filled
+    url = "https://mail.google.com/mail/?view=cm&fs=1&to=" + TO + "&su=" + S + "&body=" + B;
+    window.open(url, "_blank");
+  } else if(provider === "outlook"){
+    url = "https://outlook.live.com/mail/0/deeplink/compose?to=" + TO + "&subject=" + S + "&body=" + B;
+    window.open(url, "_blank");
+  } else {
+    // device default mail app
+    window.location.href = "mailto:" + EMAIL + "?subject=" + S + "&body=" + B;
+  }
+  document.getElementById("mailpick").classList.remove("show");
+  showToast();
+}
+</script>
+</body>
+</html>
